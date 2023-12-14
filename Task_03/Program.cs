@@ -1,47 +1,36 @@
-﻿/*Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.*/
-namespace Sem_05 {
-	public class Task_01{ 
+﻿
+/* Задача 3: Задайте произвольный массив. Выведете его элементы, начиная с конца. Использовать рекурсию, не использовать циклы. */
+
+using System.Diagnostics;
+
+namespace Sem_07 {
+	public class Task_03{ 
 		public static void Main (string [] args){
-			int row = 5;
-			int colum = 4;
-			int [,] array = FillArray (row,colum);
-            for ( int i = 0; i < row; i++){
-				for (int j = 0; j < colum; j++){
-					Console.Write (array [i,j] + "    ");
-				}
-				Console.WriteLine();	
+			int size = 5;
+			int [] array = FillArray (size);
+			foreach (int Item in array){
+				Console.Write (Item + ", ");
 			}
-			int result = MinSumRow (array, row, colum);
-			Console.WriteLine(result);	
+			Console.WriteLine ();
+			OutPut (array,  size);
 			
 		}
-		public static int [,] FillArray  (int row, int colum){
-			int [,] result = new int [row,colum];
+		public static int [] FillArray  (int size){
+			int [] result = new int [size];
 			Random rand = new ();
-			for (int i = 0; i < row; i++) {
-				for (int j = 0; j < colum; j++){
-				result [i, j] = rand.Next (0, 100);
-				}	
+			for (int i = 0; i < size; i++) {
+				result [i] = rand.Next (0, 100);	
 			}
 			return result;
 		}
-		public static int MinSumRow  (int [,] array, int row, int colum){
-		 	int result=0;
-			int minsum = 0;
-            bool flag = true;
-			for (int i = 0; i < row; i++){
-				for ( int j=0; j < colum; j++) {
-					minsum = minsum + array [i,j]; 
-				}
-                if (flag) {
-                    result = minsum;
-                    flag = false;
-                }
-				if ( minsum < result ) result = minsum ;
-				minsum = 0;
+		public static void OutPut (int [] array, int size){ 
+			if (size > 0) { 
+				size = size - 1; 
+				Console.Write (array [size] + ", ");
+				OutPut (array, size);
+				
 			}
-			return result;
+			return;
 		}
-
 	}
 }
